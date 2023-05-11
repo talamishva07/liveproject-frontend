@@ -1,0 +1,16 @@
+.image {
+    height: 500px;
+    position: relative;
+    background-image: url("https://images.unsplash.com/photo-1526772662000-3f88f10405ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dHJhdmVsbGluZ3xlbnwwfHwwfHw%3D&w=1000&q=80");
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+
+}
+
+.h1 {
+    font-size: 50px;
+    letter-spacing: 6px;
+    position: relative;
+    top: 60px;
+}

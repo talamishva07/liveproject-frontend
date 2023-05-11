@@ -1,0 +1,48 @@
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .nav-item-BLOG{
+    letter-spacing: 1px;
+    
+  }
+  
+  .nav-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    border-radius: 0.25rem;
+  }
+  
+  @media (min-width: 768px) {
+    .navbar-nav {
+      flex-direction: row;
+    }
+  
+    .nav-item {
+      margin-left: 1rem;
+      margin-bottom: 0;
+    }
+  
+    .nav-link {
+      padding: 0.5rem 1rem;
+    }
+  }
+  
