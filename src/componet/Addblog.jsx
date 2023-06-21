@@ -1,12 +1,42 @@
 import React, { useState } from "react";
 import '../componet/Addblog.css'
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+
 
 const Addblog = () => {
+
     let navi = useNavigate();
+    const location = useLocation();
+    // console.log('location:::', location.search.split('?')[1]);
+    useEffect(() => {
+        const id = location.search.split('?')[1];
+        const editData = async () => {
+            fetch(`http://localhost:7812/api/getBlog`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ my_id: id })
+            }).then((res) => res.json())
+                .then((data) => {
+                    console.log('data:::', data);
+                    setData({
+                        ...data,
+                        titel: data.datas.titel,
+                        Description: data.datas.Description,
+                        type: data.datas.type,
+                    })
+
+                })
+                .catch((error) => console.log('error::: ', error))
+        }
+        editData();
+
+    }, [])
     const [data, setData] = useState({
-        title: "",
-        describe: "",
+        titel: "",
+        Description: "", 
         type: "",
     })
     const [file, setFile] = useState();
@@ -27,11 +57,17 @@ const Addblog = () => {
             .then((data) => {
                 console.log('data::: ', data.responce);
                 if (data.responce === "sended") {
+                    toast("Blog data added")
                     navi('/');
+                }
+                else {
+                    navi('/error')
                 }
             })
             .catch(err => console.log('err::: ', err))
     }
+
+
     return (
         <div className="container col-xxl-8 px-4 py-5">
             <div style={ { width: "500px", margin: "auto" } }>
@@ -42,9 +78,9 @@ const Addblog = () => {
                         <input
                             type="text"
                             className="form-control"
-                            name='title'
+                            name='titel'
                             onChange={ handleChangeValue }
-                            value={ data.title }
+                            value={ data.titel }
                             required="" />
                         <div className="invalid-feedback">
                             Valid first name is required.
@@ -55,9 +91,9 @@ const Addblog = () => {
                         <label htmlFor="blog-des" className="form-label">Blog Description</label>
                         <div className="input-group has-validation">
                             <textarea
-                                name='describe'
+                                name='Description'
                                 onChange={ handleChangeValue }
-                                value={ data.describe }
+                                value={ data.Description }
                                 type="text" className="form-control" id="blog-des" placeholder="Blog Description" required=""></textarea>
                             <div className="invalid-feedback">
                                 Your blog-des is required.
@@ -82,7 +118,7 @@ const Addblog = () => {
                     </div>
                     <div className="col-6">
                         <label htmlFor="formFile" className="form-label">Default file input example</label>
-                        <input onChange={ (e) => setFile(e.target.files[0]) } className="form-control" type="file" accept='image/jpg, image/png, image/jpeg' id="formFile" />
+                        <input onChange={ (e) => setFile(e.target.files[0]) } className="form-control" type="file" accept='image/jpg, image/png, image/jpeg' id="formFile" name="image" />
                     </div>
                 </div>
                 <hr />

@@ -2,20 +2,19 @@ import React from "react";
 
 const Blog = ({ data }) => {
     return (
-
-        <div className="card" style={ { width: "20rem", displaywrap: "wrap" } }>
-            <img
-                src={ data.filepath }
-                className="d-block mx-lg-auto img-fluid"
-                lt="Bootstrap Themes"
-                loading="lazy" />
-            <div className="card-body">
-                <h2 className="card-title">{ data.titel }</h2>
-                <p className="card-text">{ data.type }</p>
-                <p className="card-text">{ data.Description }</p>
-                <a href="#" className="btn btn-primary">Go To Blog</a>
+        <div>
+            <div className="card" style={ { width: "18rem" } }>
+                <img className="card-img-top" src={ `http://localhost:7812/public/${data.filepath}` } alt="Card image cap" />
+                <div className="card-body">
+                    <h4 className="card-title">{ data.titel }</h4>
+                    <p className="card-text">{ data.Description }</p>
+                    <p className="card-text">{ data.type }</p>
+                    <a href="#" className="btn btn-primary">Go somewhere</a>
+                </div>
             </div>
         </div>
+
+
 
     )
 }
